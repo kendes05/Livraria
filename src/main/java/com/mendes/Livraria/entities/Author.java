@@ -1,7 +1,6 @@
 package com.mendes.Livraria.entities;
 
 import java.util.List;
-
 import jakarta.persistence.*;
 
 @Entity
@@ -18,6 +17,8 @@ public class Author {
     private String deathDate;
     private String biography;
     private String imgUrl;
+    @OneToMany(mappedBy = "author",cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Book> books;
 
     public Author(){}
     
@@ -33,8 +34,6 @@ public class Author {
         this.books = books;
     }
 
-    @OneToMany(mappedBy = "author",cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Book> books;
 
     public Long getId() {
         return id;

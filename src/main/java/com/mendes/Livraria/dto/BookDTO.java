@@ -12,13 +12,17 @@ public class BookDTO {
 
     public BookDTO() {}
 
-    public BookDTO(Long id, String title, Integer bookYear, String genre, String imgUrl,AuthorDTO author) {
+    public BookDTO(Long id, String title, Integer bookYear, String genre, String imgUrl, AuthorDTO author) {
         this.id = id;
         this.title = title;
         this.bookYear = bookYear;
         this.genre = genre;
         this.imgUrl = imgUrl;
         this.author = author;
+    }
+
+    public Book toBook(){
+        return new Book(this.id, this.author.toAuthor(),this.genre, this.title, this.bookYear, this.imgUrl);
     }
 
     public Long getId() {

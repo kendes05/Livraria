@@ -1,7 +1,6 @@
 package com.mendes.Livraria.dto;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.mendes.Livraria.entities.Author;
 import com.mendes.Livraria.entities.Book;
@@ -14,14 +13,14 @@ public class AuthorDTO {
     private String deathDate;
     private String biography;
     private String imgUrl;
-    private List<String> bookTitles;
+    private List<Book> bookTitles;
 
     public AuthorDTO() {}
 
     
 
     public AuthorDTO(Long id, String name, String nationality, String birthDate, String deathDate, String biography,
-            String imgUrl, List<String> bookTitles) {
+            String imgUrl, List<Book> bookTitles) {
         this.id = id;
         this.name = name;
         this.nationality = nationality;
@@ -30,6 +29,10 @@ public class AuthorDTO {
         this.biography = biography;
         this.imgUrl = imgUrl;
         this.bookTitles = bookTitles;
+    }
+
+    public Author toAuthor(){
+        return new Author(this.id, this.name, this.nationality, this.birthDate, this.deathDate, this.biography, this.imgUrl,this.bookTitles);
     }
 
 
@@ -82,11 +85,11 @@ public class AuthorDTO {
         this.biography = biography;
     }
 
-    public List<String> getBookTitles() {
+    public List<Book> getBookTitles() {
         return bookTitles;
     }
 
-    public void setBookTitles(List<String> bookTitles) {
+    public void setBookTitles(List<Book> bookTitles) {
         this.bookTitles = bookTitles;
     }
 
@@ -107,7 +110,7 @@ public class AuthorDTO {
             author.getDeathDate(),
             author.getBiography(),
             author.getImgUrl(),
-            author.getBooks() != null ? author.getBooks().stream().map(Book::getTitle).collect(Collectors.toList()) : null
+            author.getBooks()
         );
     }
 
