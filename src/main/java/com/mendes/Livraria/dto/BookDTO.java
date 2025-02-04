@@ -8,21 +8,26 @@ public class BookDTO {
     private Integer bookYear;
     private String genre;
     private String imgUrl;
-    private AuthorDTO author;
 
     public BookDTO() {}
 
-    public BookDTO(Long id, String title, Integer bookYear, String genre, String imgUrl, AuthorDTO author) {
+    public BookDTO(Long id, String title, Integer bookYear, String genre, String imgUrl) {
         this.id = id;
         this.title = title;
         this.bookYear = bookYear;
         this.genre = genre;
         this.imgUrl = imgUrl;
-        this.author = author;
     }
 
     public Book toBook(){
-        return new Book(this.id, this.author.toAuthor(),this.genre, this.title, this.bookYear, this.imgUrl);
+        Book book = new Book();
+        book.setId(this.id);
+        book.setTitle(this.title);
+        book.setBookYear(this.bookYear);
+        book.setGenre(this.genre);
+        book.setImgUrl(this.imgUrl);
+    
+        return book;
     }
 
     public Long getId() {
@@ -57,13 +62,6 @@ public class BookDTO {
         this.genre = genre;
     }
 
-    public AuthorDTO getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(AuthorDTO author) {
-        this.author = author;
-    }
 
     
     public String getImgUrl() {
@@ -80,8 +78,7 @@ public class BookDTO {
             book.getTitle(),
             book.getBookYear(),
             book.getGenre(),
-            book.getImgUrl(),
-            book.getAuthor() != null ? AuthorDTO.fromEntity(book.getAuthor()) : null
+            book.getImgUrl()
         );
     }
 

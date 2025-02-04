@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mendes.Livraria.dto.BookDTO;
-import com.mendes.Livraria.services.BookServices;
+import com.mendes.Livraria.services.BookService;
 
 @RestController
 @RequestMapping("/books")
 public class BookController {
     @Autowired
-    private BookServices bookService;
+    private BookService bookService;
 
     @GetMapping
     public List<BookDTO> getAllBooks() {
@@ -30,15 +30,14 @@ public class BookController {
     public BookDTO getBookById(@PathVariable Long id) {
         return bookService.getBookById(id);
     }
-
-    @PostMapping
-    public void saveBook(@RequestBody BookDTO dto){
-        bookService.saveBook(dto);
+    @PostMapping(value = "/{authorId}")
+    public void saveBook(@RequestBody BookDTO dto, @PathVariable Long authorId) {
+        bookService.saveBook(dto,authorId);
     }
 
-    @PutMapping
-    public void updateBook(@RequestBody BookDTO dto){
-        bookService.updateBook(dto);
+    @PutMapping(value = "/{authorId}")
+    public void updateBook(@RequestBody BookDTO dto,@PathVariable Long authorId) {
+        bookService.updateBook(dto,authorId);
     }
 
     @DeleteMapping
