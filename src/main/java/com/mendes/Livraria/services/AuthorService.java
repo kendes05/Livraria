@@ -30,5 +30,16 @@ public class AuthorService {
     public void saveAuthor(AuthorDTO dto) {
         authorRepository.save(dto.toAuthor());
     }
+
+    @Transactional
+    public void deleteAuthor(Long id) {
+        authorRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void updateAuthor(AuthorDTO dto) {
+        Author author = authorRepository.findById(dto.getId()).get();
+        authorRepository.save(author);
+    }
     
 }
